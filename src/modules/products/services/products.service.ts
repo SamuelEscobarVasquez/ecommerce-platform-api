@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { Product } from '../entities/product.entity';
 import { CreateProductDto } from '../dtos/create-product.dto';
 import { UpdateProductDto } from '../dtos/update-product.dto';
-import { PRODUCT_STATUS, PRODUCT_STATUS_ACTIVE } from 'src/keys';
+import { PRODUCT_STATUS } from 'src/keys';
 import { Op } from 'sequelize';
 
 @Injectable()
@@ -13,7 +13,10 @@ export class ProductsService {
   ) { }
 
   createProduct(dto: CreateProductDto): Promise<Product> {
-    return this.productModel.create(dto);
+    return this.productModel.create({
+      ...dto,
+      status: PRODUCT_STATUS.ACTIVE
+    });
   }
 
   async findOne(id: number): Promise<Product> {

@@ -8,6 +8,7 @@ import {
   InferCreationAttributes,
   CreationOptional,
 } from 'sequelize';
+import { PRODUCT_STATUS } from 'src/keys';
 
 @Table({ tableName: 'products', timestamps: true })
 export class Product extends Model<
@@ -34,7 +35,7 @@ export class Product extends Model<
   @Column({ type: DataType.INTEGER, allowNull: false })
   declare inventory: number;
 
-  @Default(2)
+  @Default(PRODUCT_STATUS.ACTIVE)
   @Column({
     field: 'status',
     type: DataType.TINYINT.UNSIGNED,

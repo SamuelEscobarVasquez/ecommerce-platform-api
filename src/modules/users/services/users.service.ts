@@ -1,4 +1,4 @@
-import { BadRequestException, ConflictException, HttpException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { BadRequestException, ConflictException, HttpException, Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { User } from '../entities/user.entity';
 import { UpdateUserDto } from '../dtos/update-user.dto';
@@ -47,6 +47,7 @@ export class UsersService {
         roleName: userCreated.role?.name ?? 'User',
       }
     } catch (error) {
+      Logger.error('Error inserting user', error)
       if (error instanceof HttpException) {
         throw error;
       }

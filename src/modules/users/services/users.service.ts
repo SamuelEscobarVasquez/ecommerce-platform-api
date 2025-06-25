@@ -37,7 +37,7 @@ export class UsersService {
       if (alreadyExistUserEmail) throw new ConflictException(USER_EMAIL_ALREADY_TAKEN_MSG);
 
       const hash = await this.passwordHashService.hashPassword(dto.password);
-      const payload = { ...dto, password: hash };
+      const payload = { ...dto, password: hash, status: USER_STATUS.ACTIVE };
 
       let userCreated = await this.userModel.create(payload);
 

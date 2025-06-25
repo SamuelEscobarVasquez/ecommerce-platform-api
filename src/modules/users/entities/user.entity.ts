@@ -13,6 +13,7 @@ import {
 } from 'sequelize-typescript';
 import { Role } from './role.entity';
 import { CreationOptional, InferAttributes, InferCreationAttributes } from 'sequelize';
+import { USER_STATUS } from 'src/keys';
 
 @Table({ tableName: 'users', timestamps: true })
 export class User extends Model<
@@ -40,7 +41,7 @@ export class User extends Model<
   @BelongsTo(() => Role)
   declare role?: Role;
 
-  @Default(2)
+  @Default(USER_STATUS.ACTIVE)
   @Column({
     field: 'status',
     type: DataType.TINYINT.UNSIGNED,
